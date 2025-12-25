@@ -1,0 +1,57 @@
+class CricketPlayer:
+    def __init__(self, name, runs, average, strike_rate, wickets, economy, catches):
+        self.name = name
+        self.runs = runs
+        self.average = average
+        self.strike_rate = strike_rate
+        self.wickets = wickets
+        self.economy = economy
+        self.catches = catches
+
+    def batting_score(self):
+        return (self.runs * 0.3) + (self.average * 0.4) + (self.strike_rate * 0.3)
+
+    def bowling_score(self):
+        return (self.wickets * 5) - (self.economy * 2)
+
+    def fielding_score(self):
+        return self.catches * 3
+
+    def overall_score(self):
+        return self.batting_score() + self.bowling_score() + self.fielding_score()
+
+    def player_type(self):
+        bat = self.batting_score()
+        bowl = self.bowling_score()
+
+        if bat > 100 and bowl > 40:
+            return "All-Rounder"
+        elif bat > bowl:
+            return "Batsman"
+        elif bowl > bat:
+            return "Bowler"
+        else:
+            return "Average Player"
+
+    def analyze(self):
+        print("\n--- Player Analysis ---")
+        print("Name:", self.name)
+        print("Batting Score:", round(self.batting_score(), 2))
+        print("Bowling Score:", round(self.bowling_score(), 2))
+        print("Fielding Score:", self.fielding_score())
+        print("Overall Score:", round(self.overall_score(), 2))
+        print("Player Type:", self.player_type())
+
+
+# ----------- Example Usage -------------
+player1 = CricketPlayer(
+    name="Virat",
+    runs=12000,
+    average=58,
+    strike_rate=93,
+    wickets=5,
+    economy=6.5,
+    catches=120
+)
+
+player1.analyze()
